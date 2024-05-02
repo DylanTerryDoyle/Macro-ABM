@@ -37,17 +37,8 @@ class Market:
         dt : float
             time delta, inverse steps
         
-        transition : bool
-            transition state
-        
-        transition_time : int
-            number of steps in transition
-        
         growth : float
             average growth rate
-        
-        growth_reduction : float
-            amount growth is reduced each transition period
         
         num_households : int
             number of households in simulation
@@ -218,9 +209,7 @@ class Market:
         bankruptcies(self, s: int, t: int) -> None
         
         market_shares(self, t: int) -> None
-        
-        start_transition(self, t: int) -> None
-        
+                
         copy_cfirm(self, cfirm: ConsumptionFirm) -> ConsumptionFirm
         
         copy_kfirm(self, kfirm: CapitalFirm) -> CapitalFirm
@@ -261,10 +250,7 @@ class Market:
         self.time:                  int   = (params['simulation']['years'] + params['simulation']['start'])*self.steps + 1
         self.start:                 int   = params['simulation']['start']*self.steps
         self.dt:                    float = 1/self.steps
-        self.transition:            bool  = params['simulation']['transition']
-        self.transition_time:       int   = params['simulation']['transition_years']*self.steps
         self.growth:                float = params['firm']['growth']*self.dt
-        self.growth_reduction:      float = self.growth/self.transition_time
         self.num_households:        int   = params['market']['num_households']
         self.num_banks:             int   = params['market']['num_banks']
         self.num_cfirms:            int   = params['market']['num_cfirms']
@@ -934,20 +920,6 @@ class Market:
         for bank in self.banks:
             bank.determine_balance_sheet(t)
             bank.determine_market_share(loans, t)
-    
-    def start_transition(self, t: int) -> None:
-        """
-        Starts the transition from a growth to zero-growth scenario when option is turned on.
-        
-        Parameters
-        ----------
-            t : int
-                time period
-        """
-        if t >= (self.time+self.start-self.transition_time)/2 and t < (self.time+self.start+self.transition_time)/2:
-            self.growth = round(self.growth - self.growth_reduction, 10)
-            for firm in self.firms:
-                firm.growth = self.growth
 
     def copy_cfirm(self, cfirm: ConsumptionFirm) -> ConsumptionFirm:
         """
@@ -1408,9 +1380,6 @@ class Market:
                 self.indicators(s, t)
                 self.update_database(cur, s, t)
                 self.print_results(s, t)
-                # transition to zero growth mid simulation
-                if self.transition:
-                    self.start_transition(t)
         # end simulation timer
         end_time = time.perf_counter()
         # total simulaton time

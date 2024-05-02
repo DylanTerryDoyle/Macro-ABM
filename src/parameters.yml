@@ -11,10 +11,6 @@ simulation:
   steps: 4
   # start year (transient data cut-off)
   start: 50
-  # transition run
-  transition: true
-  # transition years 
-  transition_years: 1
 
 # Market Parameters
 market:
