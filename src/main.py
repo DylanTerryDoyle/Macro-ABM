@@ -11,8 +11,14 @@ def main():
     params = load_parameters('parameters.yml')
     # create market object
     market = Market(params)
-    # connect to database
-    conn = sqlite3.connect(f"{params['database_path']}\\{params['database_name']}.db")
+    # connect/create database
+    try:
+        # connect/create specified database path and name
+        conn = sqlite3.connect(f"{params['database_path']}\\{params['database_name']}.db")
+    except sqlite3.OperationalError:
+        # connect/create to database called data in current src folder if database details are not given
+        conn = sqlite3.connect(f"data.db")
+    # create cursor 
     cur = conn.cursor()
     # run simulation
     market.run_simulation(cur)
