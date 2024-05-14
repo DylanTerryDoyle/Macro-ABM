@@ -1,6 +1,6 @@
 # Name of SQL database
-database_name: 'growth_test'
-database_path: 'C:\Users\Dylan\Documents\University\BSc Dissertation\Publishing\MacroABM\data'
+database_name: 'update_database_name'
+database_path: 'update/path/to/database'
 
 # Simulation Parameters
 simulation:
@@ -77,8 +77,8 @@ cfirm:
   acceleration: 3
   # desired debt parameters
   d0: 0.5
-  d1: 2
-  d2: 1
+  d1: 3
+  d2: 2
   # number of K-firms visited (capital market)
   num_kfirms: 2
 
