@@ -11,11 +11,8 @@ def main():
     params = load_parameters('parameters.yml')
     # create market object
     market = Market(params)
-    # database path
-    parent_path = os.path.abspath(os.path.join(os.getcwd(), os.pardir))
-    database_path = f"{parent_path}\\data"
     # connect to database
-    conn = sqlite3.connect(f"{database_path}\\{params['database_name']}.db")
+    conn = sqlite3.connect(f"{params['database_path']}\\{params['database_name']}.db")
     cur = conn.cursor()
     # run simulation
     market.run_simulation(cur)

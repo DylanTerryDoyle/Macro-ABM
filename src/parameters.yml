@@ -1,10 +1,11 @@
 # Name of SQL database
-database_name: 'transition'
+database_name: 'growth_test'
+database_path: 'C:\Users\Dylan\Documents\University\BSc Dissertation\Publishing\MacroABM\data'
 
 # Simulation Parameters
 simulation:
   # number of simulations
-  num_sims: 50
+  num_sims: 1
   # number of years in each simulation
   years: 100
   # number of steps in each year

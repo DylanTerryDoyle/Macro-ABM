@@ -19,9 +19,6 @@ class Market:
         params : dict
             model parameters
         
-        database_name : str
-            name of SQL database
-        
         simulations : int
             number of simulation
         
@@ -244,7 +241,6 @@ class Market:
         """
         # Parameters
         self.params:                dict  = params
-        self.database_name:         str   = params['database_name']
         self.simulations:           int   = params['simulation']['num_sims']
         self.steps:                 int   = params['simulation']['steps']
         self.time:                  int   = (params['simulation']['years'] + params['simulation']['start'])*self.steps + 1

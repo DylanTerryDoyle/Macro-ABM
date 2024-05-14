@@ -1,11 +1,4 @@
 import yaml
-import numpy as np
-import powerlaw as pl
-from scipy import stats
-import matplotlib.pyplot as plt
-from matplotlib.collections import PolyCollection
-import statsmodels.api as sm
-from statsmodels.graphics import tsaplots
 
 def load_parameters(filename: str):
     """
