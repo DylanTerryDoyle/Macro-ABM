@@ -1,4 +1,3 @@
-import os
 import sqlite3
 from market import Market
 from utils import * 
